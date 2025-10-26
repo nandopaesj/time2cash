@@ -1,0 +1,44 @@
+<ion-header translucent>
+  <ion-toolbar color="dark">
+    <ion-title>Time 2 Cash</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+  <div class="page-background"></div>
+
+  <div class="page-container">
+    <div class="section-header">
+      <h1>Quanto vale seu desejo?</h1>
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked">Nome do produto</ion-label>
+      <ion-input [(ngModel)]="nomeProduto" placeholder="Ex.: Colchão"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Preço (R$)</ion-label>
+      <ion-input type="number" [(ngModel)]="precoProduto" placeholder="1500"></ion-input>
+    </ion-item>
+
+    <div style="margin-top:16px; display:flex; gap:12px;">
+      <ion-button expand="block" color="primary" (click)="simularCompra()">Calcular</ion-button>
+    </div>
+
+    <div *ngIf="loading" style="margin-top:16px;">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Calculando...</p>
+    </div>
+  </div>
+
+  <!-- Botão flutuante estilo iOS com rotação -->
+  <div class="floating-button" [class.rotated]="menuAberto" (click)="toggleMenu()">
+    <span class="icon"><ion-icon name="logo-usd"></ion-icon></span>
+  </div>
+
+  <div class="floating-menu" *ngIf="menuAberto">
+    <div class="menu-button" (click)="goToFixedExpenses()"><ion-icon name="wallet"></ion-icon></div>
+    <div class="menu-button">%</div>
+  </div>
+</ion-content>

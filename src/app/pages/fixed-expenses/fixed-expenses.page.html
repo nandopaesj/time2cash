@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/page-calchours"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Gastos Fixos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="loading">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let e of expenses">
+      <ion-label>
+        <h3>{{ e.name }}</h3>
+        <p>R$ {{ e.amount | number:'1.2-2' }}</p>
+        <p *ngIf="e.note" class="muted smaller">{{ e.note }}</p>
+      </ion-label>
+      <ion-button fill="clear" color="danger" (click)="deleteExpense(e.id)">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Adicionar gasto fixo</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Nome</ion-label>
+        <ion-input [(ngModel)]="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Valor mensal (R$)</ion-label>
+        <ion-input type="number" [(ngModel)]="amount"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Observação (opcional)</ion-label>
+        <ion-input [(ngModel)]="note"></ion-input>
+      </ion-item>
+
+      <div style="margin-top:12px;">
+        <ion-button expand="block" (click)="addExpense()">Salvar</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons> -->
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="loading" style="text-align:center; padding:40px;">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Carregando perfil...</p>
+  </div>
+
+  <div *ngIf="!loading">
+    <!-- Apenas mostra o bloco de perfil se user existir -->
+    <div *ngIf="user; else notLogged">
+      <ion-item lines="none">
+        <ion-avatar slot="start">
+          <img *ngIf="user?.photoURL || profile.photoURL; else defaultAvatar"
+               [src]="profile?.photoURL ?? user.photoURL"
+               alt="avatar">
+          <ng-template #defaultAvatar>
+            <ion-icon name="person-circle-outline" style="font-size:36px;"></ion-icon>
+          </ng-template>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ profile.displayName || user.displayName || user.email }}</h2>
+          <p style="font-size:0.9rem; color:var(--ion-color-medium)">UID: {{ uid }}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked">E-mail</ion-label>
+          <ion-input [value]="profile?.email || user.email" readonly></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Nome</ion-label>
+          <ion-input [(ngModel)]="profile.displayName" placeholder="Seu nome"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Salário mensal (R$)</ion-label>
+          <ion-input type="number" [(ngModel)]="profile.salario_mensal" placeholder="0.00"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Carga horária (Horas por semana)</ion-label>
+          <ion-input type="number" [(ngModel)]="profile.carga_horaria_semanal" placeholder="40"></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <div style="display:flex; gap:12px; margin-top:18px;">
+        <ion-button expand="block" color="primary" (click)="salvarPerfil()">Salvar</ion-button>
+        <ion-button expand="block" color="medium" routerLink="/">Cancelar</ion-button>
+        <ion-button expand="block" color="danger" (click)="logout()">SAIR</ion-button>
+      </div>
+    </div>
+
+    <ng-template #notLogged>
+      <p>Usuário não autenticado. Faça login para ver e editar o perfil.</p>
+      <ion-button expand="block" color="primary" routerLink="/login">Fazer login</ion-button>
+    </ng-template>
+  </div>
+</ion-content>

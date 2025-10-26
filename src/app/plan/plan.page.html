@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Planejamento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="loading" class="loader" style="text-align:center;padding:18px;">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <div *ngIf="!loading">
+    <div class="years-row">
+      <div class="year-pill" *ngFor="let y of years" [class.selected]="isYearSelected(y)" (click)="selectYear(y)">
+        {{ y }}
+      </div>
+    </div>
+
+    <div class="months-row">
+      <div class="month-pill" *ngFor="let m of monthsForYear(selectedYear)" [class.selected]="isMonthSelected(m)" (click)="selectMonth(m)">
+        {{ monthNames[m] }}
+      </div>
+    </div>
+
+    <div class="month-title">
+      <h2>{{ monthYearTitle() }}</h2>
+    </div>
+
+    <div class="summary">
+      <h3>
+        Comprometido neste mês:
+        <br><strong>R$ {{ monthlyCommitted | number:'1.2-2' }}</strong>
+      </h3>
+    </div>
+
+    <div *ngIf="parcelsThisMonth.length > 0; else noPurchases">
+      <ion-list>
+        <ng-container *ngFor="let parc of parcelsThisMonth">
+          <ion-item-sliding>
+            <ion-item>
+              <ion-label>
+                <div class="purchase-header">
+                  <div class="purchase-info">
+                    <div class="purchase-name">{{ parc.name }}</div>
+                    <div *ngIf="parc.originalPrice" class="muted small">Total: R$ {{ parc.originalPrice | number:'1.2-2' }}</div>
+                    <div *ngIf="parc.confirmedAt" class="muted smaller">{{ parc.confirmedAt | date:'dd/MM/yyyy' }}</div>
+                  </div>
+
+                  <div class="purchase-value">
+                    <div class="value-highlight">R$ {{ parc.installmentValue | number:'1.2-2' }}</div>
+                    <div class="installment-index">{{ parc.installmentIndex }}/{{ parc.totalInstallments }}</div>
+                  </div>
+                </div>
+              </ion-label>
+            </ion-item>
+
+            <ion-item-options side="end">
+              <ion-item-option color="danger" (click)="confirmAndDeletePurchase(parc.purchaseId, parc.name)">
+                <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ng-container>
+      </ion-list>
+    </div>
+
+    <ng-template #noPurchases>
+      <div class="empty">
+        <p>Nenhuma compra registrada neste mês.</p>
+        <p>Confirme simulações para adicioná-las aqui.</p>
+      </div>
+    </ng-template>
+
+    <!-- resumo de gastos fixos -->
+    <div *ngIf="fixedTotal && fixedTotal > 0" class="fixed-summary" style="margin-top:16px;">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Gastos fixos mensais</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Total fixos: <strong>R$ {{ fixedTotal | number:'1.2-2' }}</strong>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

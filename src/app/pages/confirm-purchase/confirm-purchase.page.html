@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/page-calchours"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Confirmar Compra</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="purchase; else noPurchase">
+    <h2>Comprando: <strong>{{ purchase.nome }}</strong></h2>
+    <p><strong>Preço:</strong> R$ {{ purchase.preco | number:'1.2-2' }}</p>
+    <!-- <p *ngIf="purchase.valorHora"><strong>Valor/hora usado:</strong> R$ {{ purchase.valorHora | number:'1.2-2' }}</p> -->
+    <p *ngIf="purchase.horasNecessarias"><strong>Horas de trabalho necessárias:</strong> {{ purchase.horasNecessarias | number:'1.2-2' }} h</p>
+
+    <ion-item>
+      <ion-label position="stacked">Parcelas</ion-label>
+      <ion-input type="number" [(ngModel)]="parcelas" (ionChange)="updateParcelas()"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Juros (%)</ion-label>
+      <ion-input type="number" [(ngModel)]="jurosPercent" (ionChange)="updateParcelas()"></ion-input>
+    </ion-item>
+
+    <div style="margin-top:12px">
+      <p><strong>Total com juros:</strong> R$ {{ totalComJuros | number:'1.2-2' }}</p>
+      <p><strong>Valor da parcela (aprox.):</strong> R$ {{ parcelaValor | number:'1.2-2' }}</p>
+    </div>
+
+    <div style="display:flex; gap:12px; margin-top:16px;">
+      <ion-button expand="block" color="primary" (click)="confirmar()">Confirmar e Salvar</ion-button>
+      <ion-button expand="block" color="medium" (click)="cancelar()">Cancelar</ion-button>
+    </div>
+  </div>
+
+  <ng-template #noPurchase>
+    <p>Nenhuma compra carregada para confirmação.</p>
+    <ion-button expand="block" (click)="cancelar()">Voltar</ion-button>
+  </ng-template>
+</ion-content>

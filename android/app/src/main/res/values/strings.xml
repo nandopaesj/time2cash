@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Time2Cash</string>
+    <string name="title_activity_main">Time2Cash</string>
+    <string name="package_name">com.time2cash.app</string>
+    <string name="custom_url_scheme">com.time2cash.app</string>
+    <string name="default_web_client_id">124061756981-ti5grcv54jord3ihlegu97emvgp7oi0i.apps.googleusercontent.com</string>
+</resources>

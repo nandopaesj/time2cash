@@ -1,0 +1,133 @@
+:host {
+  display: block;
+  --ion-padding-start: 16px;
+  --ion-padding-end: 16px;
+}
+
+/* loader */
+.loader {
+  text-align: center;
+  padding: 18px;
+}
+
+/* anos */
+.years-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 8px 0;
+  margin-bottom: 8px;
+}
+.year-pill {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #f0f2f5;
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: 600;
+  color: #333;
+  border: 1px solid transparent;
+}
+.year-pill.selected {
+  background: var(--ion-color-primary, #3880ff);
+  color: #fff;
+  border-color: rgba(0,0,0,0.06);
+}
+
+/* meses */
+.months-row {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 6px 0;
+  margin-bottom: 12px;
+}
+.month-pill {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #fafafa;
+  cursor: pointer;
+  color: #444;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  font-weight: 500;
+}
+.month-pill.selected {
+  background: var(--ion-color-primary, #3880ff);
+  color: #fff;
+  border-color: rgba(0,0,0,0.06);
+}
+
+/* título */
+.month-title h2 {
+  margin: 8px 0 0 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+.month-title .muted {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* resumo */
+.summary {
+  margin: 12px 0 16px 0;
+}
+
+/* empty */
+.empty {
+  text-align: center;
+  padding: 28px 12px;
+  color: #666;
+}
+
+/* purchase list */
+.purchase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.purchase-info {
+  flex: 1;
+  padding-right: 8px;
+}
+
+.purchase-name {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+/* value block on the right */
+.purchase-value {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  min-width: 110px;
+}
+
+.value-highlight {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ion-color-danger, #0fec34);
+  line-height: 1;
+}
+
+.installment-index {
+  font-size: 0.72rem;
+  color: #999;
+  margin-top: 2px;
+}
+
+/* small text helpers */
+.muted.small {
+  font-size: 0.85rem;
+  color: var(--ion-color-medium, #909090);
+}
+.muted.smaller {
+  font-size: 0.72rem;
+  color: var(--ion-color-medium, #909090);
+}

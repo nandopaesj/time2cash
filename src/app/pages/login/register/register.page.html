@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cadastro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="cadastrar()">
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input type="name" [(ngModel)]="name" name="name" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input type="password" [(ngModel)]="senha" name="senha" required minlength="6"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Salário mensal</ion-label>
+      <ion-input type="number" [(ngModel)]="salario_mensal" name="salario_mensal" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Carga horária semanal (Em horas)</ion-label>
+      <ion-input type="number" [(ngModel)]="carga_horaria_semanal" name="carga_horaria_semanal" required></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="!email || !senha || senha.length < 6">Cadastrar</ion-button>
+  </form>
+</ion-content>
