@@ -172,6 +172,7 @@ export class PlanPage implements OnInit, OnDestroy, ViewWillEnter
     this.parcelsThisMonth = [];
     this.monthlyCommitted = 0;
     this.monthlyTotal = 0;
+    this.fixedTotal = 0;
 
     const user = this.auth.currentUser;
     if (!user)
@@ -180,10 +181,12 @@ export class PlanPage implements OnInit, OnDestroy, ViewWillEnter
       return;
     }
 
-    try {
+    try
+    {
+      // purchasesService retorna purchases que intersectam o mês
       const data = await this.purchasesService.getPurchasesForMonth(user.uid, monthIndex, year);
 
-      // desenvolve os dados recebidos (gpt malou nessa)
+      // normaliza docs
       this.purchasesThisMonth = data.map((d: any) => ({
         id: d.id,
         name: d.name || d.nome || d.title || 'Compra',
@@ -195,12 +198,14 @@ export class PlanPage implements OnInit, OnDestroy, ViewWillEnter
         confirmedAt: d.confirmedAt ? (d.confirmedAt.toDate ? d.confirmedAt.toDate() : d.confirmedAt) : null
       }));
 
-      // converte purchases e separa as parcelas que caem no mês selecionado
+      // converte purchases -> parcelas para o mês selecionado
       const selectedYM = this.toYYYYMM(year, monthIndex);
       const parcelas: any[] = [];
-      for (const p of this.purchasesThisMonth) {
-        const diff = this.monthsDiff(p.startCommittedMonth, selectedYM); // 0-based index
-        if (diff >= 0 && diff < p.installments) {
+      for (const p of this.purchasesThisMonth)
+      {
+        const diff = this.monthsDiff(p.startCommittedMonth, selectedYM); // 0-based
+        if (diff >= 0 && diff < p.installments)
+        {
           parcelas.push({
             purchaseId: p.id,
             name: p.name,
@@ -212,16 +217,31 @@ export class PlanPage implements OnInit, OnDestroy, ViewWillEnter
           });
         }
       }
-
       this.parcelsThisMonth = parcelas;
 
       // somas
       this.monthlyCommitted = parcelas.reduce((acc, it) => acc + Number(it.installmentValue || 0), 0);
-      this.monthlyTotal = this.purchasesThisMonth.reduce((acc, it) => acc + Number(it.originalPrice || it.price || 0), 0);
+      this.monthlyTotal = this.purchasesThisMonth.reduce((acc, it) => acc + Number(it.price || 0), 0);
 
-    } catch (err) {
+      // CARREGA gastos fixos SÓ no momento de carregar mês (evita expandir anos por causa de fixos)
+      if (this.uid)
+      {
+        try
+        {
+          const fixedList = await this.purchasesService.getFixedExpenses(this.uid);
+          this.fixedTotal = fixedList.reduce((acc, it) => acc + Number(it.amount || 0), 0);
+          this.monthlyCommitted += this.fixedTotal;
+        }catch (err)
+        {
+          console.warn('Erro ao carregar gastos fixos:', err);
+          this.fixedTotal = 0;
+        }
+      }
+    }catch (err)
+    {
       console.error('Erro ao carregar compras:', err);
-    } finally {
+    }finally
+    {
       this.loading = false;
     }
   }
