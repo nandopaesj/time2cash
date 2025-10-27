@@ -158,3 +158,6 @@ ios/App/GoogleService-Info.plist
 android/key.properties
 android/gradle.properties
 .env
+.jks
+keystore.jks
+build-android.bat
