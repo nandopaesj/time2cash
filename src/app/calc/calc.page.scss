@@ -1,163 +1,261 @@
-ion-content {
-  --background: transparent;
-  position: relative;
-  color: #ffffff;
+:host {
+  --ion-color-primary: #39ff14; // Verde Lima Neon
+  --ion-color-primary-contrast: #000000;
+  --ion-background-color: #0a0a0a; // Fundo preto profundo
+  --ion-text-color: #ffffff;
+  --ion-item-background: rgba(20, 20, 20, 0.8);
+  --input-height: 55px; // Nova variável para altura dos inputs
+  --button-height: 60px; // Nova variável para altura dos botões
+
+
+  --neon-glow-shadow: 0 0 5px rgba(57, 255, 20, 0.8),
+                      0 0 10px rgba(57, 255, 20, 0.6),
+                      0 0 20px rgba(57, 255, 20, 0.4),
+                      0 0 40px rgba(57, 255, 20, 0.2);
+
+  --neon-text-shadow: 0 0 3px rgba(57, 255, 20, 0.9),
+                      0 0 5px rgba(57, 255, 20, 0.7);
 }
 
-.page-background {
+// --- Estilo Geral do Conteúdo ---
+ion-content {
+  --background: var(--ion-background-color);
+  position: relative;
+}
+
+// Fundo com Padrão (background-wrapper e background-pattern)
+.background-wrapper {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(160deg, #1a1a1d, #2c2c2e);
+  overflow: hidden;
   z-index: 0;
+}
+
+.background-pattern {
+  width: 100%;
+  height: 100%;
+  // Detalhe de fundo mais complexo: Grid + Linhas de Código (Scanline)
+  background:
+    // Linhas de código/Scanline (Horizontal)
+    repeating-linear-gradient(
+      to bottom,
+      rgba(57, 255, 20, 0.03),
+      rgba(57, 255, 20, 0.03) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    // Grid (Vertical)
+    linear-gradient(rgba(57, 255, 20, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57, 255, 20, 0.05) 1px, transparent 1px),
+    var(--ion-background-color);
+  background-size: 100% 100%, 20px 20px, 20px 20px, 100% 100%;
+  opacity: 0.7; // Aumenta a opacidade para dar mais presença
+  animation: background-scroll 60s linear infinite; // Animação sutil de scroll
+}
+
+@keyframes background-scroll {
+  from { background-position: 0 0; }
+  to { background-position: 0 100%; }
 }
 
 .page-container {
   position: relative;
   z-index: 1;
-  padding: 24px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+  padding: 20px;
 }
 
-.custom-toolbar {
-  --background: #1a1a1d;
-  --color: #ffffff;
-  border-bottom: 0.5px solid #333;
+// --- Header e Toolbar ---
+ion-header {
+  // Remove a sombra padrão do header
+  &.ion-no-border {
+    box-shadow: none !important;
+  }
 }
 
+ion-toolbar {
+  --background: #101010;
+  --border-color: var(--ion-color-primary);
+  --border-width: 0 0 2px 0;
+  box-shadow: var(--neon-glow-shadow);
+}
+
+ion-title {
+  color: var(--ion-color-primary);
+  text-shadow: var(--neon-text-shadow);
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  text-align: center;
+}
+
+// --- Título da Seção ---
 .section-header {
+  margin-top: 20px;
+  margin-bottom: 30px;
+
   h1 {
-    font-size: 1.6rem;
+    color: var(--ion-color-primary);
+    text-shadow: var(--neon-text-shadow);
+    font-size: 1.8em;
     font-weight: 700;
-    margin: 0;
-    color: #ffffff;
-  }
-
-  p {
-    font-size: 0.95rem;
-    color: #b3b3b3;
-    margin-top: 4px;
+    text-align: center;
   }
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+// --- Campos de Input (ion-item) ---
+ion-item {
+  --background: var(--ion-item-background);
+  --border-radius: 10px;
+  --highlight-color-focused: var(--ion-color-primary);
+  margin-bottom: 25px;
+  --min-height: var(--input-height); // Aumenta a altura do item
+  border: 1px solid rgba(57, 255, 20, 0.4);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    border-color: rgba(57, 255, 20, 0.8);
+  }
+
+  &.ion-focused {
+    border: 1px solid var(--ion-color-primary);
+    box-shadow: var(--neon-glow-shadow);
+  }
 }
 
-.input-item {
-  --background: #2a2a2d;
-  --color: #ffffff;
-  --border-radius: 14px;
-  padding: 8px 12px;
-  font-size: 1rem;
-  ion-icon {
-    color: #aaaaaa;
-    font-size: 20px;
-  }
-  ion-input::placeholder {
-    color: #888;
-  }
-}
-
-.primary-button {
-  --background: #00c853;
-  --background-hover: #00b94d;
-  --border-radius: 14px;
+ion-label[position="stacked"] {
+  color: rgba(255, 255, 255, 0.8);
   font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-  box-shadow: 0 6px 18px rgba(0, 200, 83, 0.25);
+  margin-bottom: 5px;
+  font-size: 1.1em; // Aumenta o tamanho da label
 }
 
-.card-action {
-  background-color: #2f2f31;
-  border-radius: 16px;
-  padding: 18px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-  transition: background 0.3s ease, transform 0.15s ease;
+ion-input {
+  --color: #ffffff;
+  --placeholder-color: rgba(255, 255, 255, 0.4);
+  --caret-color: var(--ion-color-primary);
+  font-size: 1.1em; // Aumenta o tamanho do texto do input
+}
 
-  &:active {
-    transform: scale(0.97);
-    background-color: #3a3a3c;
-  }
+// --- Botão Calcular ---
+.button-container {
+  margin-top: 40px;
+}
 
-  .card-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+ion-button {
+  --background: var(--ion-color-primary);
+  --background-activated: #5aff3d;
+  --background-focused: #48ff27;
+  --background-hover: #48ff27;
+  --color: var(--ion-color-primary-contrast);
+  --border-radius: 10px;
+  --box-shadow: var(--neon-glow-shadow);
+  font-weight: bold;
+  height: var(--button-height); // Usa a nova variável de altura
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
 
-    h2 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin: 0;
-      color: #ffffff;
-    }
-
-    p {
-      font-size: 0.9rem;
-      color: #b0b0b0;
-      margin: 6px 0 0 0;
-    }
-
-    ion-icon {
-      font-size: 20px;
-      color: #888;
-    }
+  &:hover {
+    transform: translateY(-2px);
+    --box-shadow: 0 0 10px rgba(57, 255, 20, 0.8),
+                  0 0 20px rgba(57, 255, 20, 0.6),
+                  0 0 40px rgba(57, 255, 20, 0.4);
   }
 }
 
+// --- Loading Spinner ---
+.loading-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+ion-spinner {
+  color: var(--ion-color-primary);
+  width: 30px;
+  height: 30px;
+}
+
+// --- Botão Flutuante (Floating Action Button - FAB) ---
 .floating-button {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 60px;
-  height: 60px;
-  background-color: #2c2c2e;
+  bottom: 30px; // Aumenta a distância da borda
+  right: 30px; // Aumenta a distância da borda
+  width: 70px; // Aumenta o tamanho do FAB
+  height: 70px; // Aumenta o tamanho do FAB
   border-radius: 50%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background: var(--ion-color-primary);
+  color: var(--ion-color-primary-contrast);
+  /* Adicionando um filtro de sombra para garantir que o ícone se destaque no fundo neon */
+  filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.5));
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  box-shadow: var(--neon-glow-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   z-index: 10;
-  transition: transform 0.4s ease-in-out;
+
+  .icon {
+    display: flex;
+    transition: transform 0.3s ease;
+  }
+
+  ion-icon {
+    font-size: 2.2em; // Aumenta o tamanho do ícone
+    color: var(--ion-color-primary-contrast); /* Garante que o ícone seja preto para contraste */
+  }
+
+  &.rotated .icon {
+    transform: rotate(45deg);
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--ion-color-primary);
+  }
 }
 
-.floating-button.rotated {
-  transform: rotate(360deg);
-}
-
-.icon {
-  font-size: 28px;
-  color: #ffffff;
-  user-select: none;
-}
-
+// --- Menu Flutuante ---
 .floating-menu {
   position: fixed;
-  bottom: 94px;
-  right: 24px;
+  bottom: 110px; // Ajusta a posição para o novo tamanho do FAB
+  right: 30px; // Ajusta a posição para o novo tamanho do FAB
+  background: rgba(16, 16, 16, 0.95); // Fundo semi-transparente escuro
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: var(--neon-glow-shadow);
+  border: 1px solid rgba(57, 255, 20, 0.5);
+  z-index: 9;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  z-index: 9;
+  gap: 10px;
 }
 
 .menu-button {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: #3a3a3c;
-  color: white;
-  font-size: 22px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  ion-icon {
+    font-size: 1.4em;
+    margin-right: 10px;
+    color: var(--ion-color-primary);
+    text-shadow: var(--neon-text-shadow);
+  }
+
+  span {
+    font-weight: 500;
+  }
+
+  &:hover {
+    background-color: rgba(57, 255, 20, 0.1);
+    color: var(--ion-color-primary);
+  }
 }

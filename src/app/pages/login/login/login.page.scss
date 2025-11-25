@@ -1,0 +1,185 @@
+:host {
+  --ion-color-primary: #39ff14; // Verde Lima Neon
+  --ion-color-primary-contrast: #000000;
+  --ion-background-color: #0a0a0a; // Fundo preto profundo
+  --ion-text-color: #ffffff;
+  --ion-item-background: rgba(20, 20, 20, 0.8);
+
+  // Efeito de brilho (Glow)
+  --neon-glow-shadow: 0 0 5px rgba(57, 255, 20, 0.8),
+                      0 0 10px rgba(57, 255, 20, 0.6),
+                      0 0 20px rgba(57, 255, 20, 0.4),
+                      0 0 40px rgba(57, 255, 20, 0.2);
+
+  --neon-text-shadow: 0 0 3px rgba(57, 255, 20, 0.9),
+                      0 0 5px rgba(57, 255, 20, 0.7);
+}
+
+// --- Estilo Geral do Conteúdo ---
+ion-content {
+  --background: var(--ion-background-color);
+  // Adiciona uma sutil textura de grid para um look mais "tech"
+  --background: linear-gradient(rgba(57, 255, 20, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(57, 255, 20, 0.05) 1px, transparent 1px),
+                var(--ion-background-color);
+  background-size: 20px 20px, 20px 20px, 100% 100%;
+}
+
+// --- Título da Página ---
+ion-toolbar {
+  --background: #101010;
+  --border-color: var(--ion-color-primary);
+  --border-width: 0 0 2px 0;
+  box-shadow: var(--neon-glow-shadow);
+}
+
+ion-title {
+  color: var(--ion-color-primary);
+  text-shadow: var(--neon-text-shadow);
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  text-align: center;
+}
+
+// --- Campos de Input (Email e Senha) ---
+ion-item {
+  --background: var(--ion-item-background);
+  --border-radius: 10px;
+  --border-color: transparent;
+  --highlight-color-focused: var(--ion-color-primary);
+  margin-bottom: 20px;
+  border: 1px solid rgba(57, 255, 20, 0.4);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    border-color: rgba(57, 255, 20, 0.8);
+  }
+
+  &.item-interactive-disabled {
+    opacity: 0.5;
+  }
+
+  &.ion-focused {
+    border: 1px solid var(--ion-color-primary);
+    box-shadow: var(--neon-glow-shadow);
+  }
+}
+
+ion-label[position="floating"] {
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.3s ease;
+
+  &.label-floating {
+    color: var(--ion-color-primary);
+    text-shadow: var(--neon-text-shadow);
+  }
+}
+
+ion-input {
+  --color: #ffffff;
+  --placeholder-color: rgba(255, 255, 255, 0.4);
+  --caret-color: var(--ion-color-primary);
+}
+
+// --- Botões ---
+
+// Botão principal "Entrar"
+ion-button[color="success"] {
+  --background: var(--ion-color-primary);
+  --background-activated: #5aff3d;
+  --background-focused: #48ff27;
+  --background-hover: #48ff27;
+  --color: var(--ion-color-primary-contrast);
+  --border-radius: 10px;
+  --box-shadow: var(--neon-glow-shadow);
+  font-weight: bold;
+  height: 48px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    --box-shadow: 0 0 10px rgba(57, 255, 20, 0.8),
+                  0 0 20px rgba(57, 255, 20, 0.6),
+                  0 0 40px rgba(57, 255, 20, 0.4);
+  }
+}
+
+// Botão "Criar conta"
+ion-router-link ion-button[fill="clear"] {
+  --color: var(--ion-color-primary);
+  text-shadow: var(--neon-text-shadow);
+  font-weight: 600;
+  transition: letter-spacing 0.3s ease;
+
+  &:hover {
+    letter-spacing: 1px;
+  }
+}
+
+// Botão "Esqueci minha senha"
+ion-button[color="danger"][fill="clear"] {
+  --color: #ff4d4d; // Um vermelho para contraste
+  --color-activated: #ff8080;
+  --color-hover: #ff6666;
+  font-size: 12px;
+  transition: text-shadow 0.3s ease;
+
+  &:hover {
+    text-shadow: 0 0 5px rgba(255, 77, 77, 0.8);
+  }
+}
+
+// Botão de Login com Google
+.div-google-login {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.btn-google {
+  display: flex; // Adiciona Flexbox
+  justify-content: center; // Centraliza horizontalmente
+  align-items: center; // Centraliza verticalmente
+  --background: transparent; // Garante que o fundo do botão Ionic seja transparente
+  --background-activated: rgba(57, 255, 20, 0.1); // Efeito de clique sutil
+
+  --padding-start: 0;
+  --padding-end: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  // Adicionando um fundo preto para o botão para garantir que a imagem do Google (que pode ter transparência) se destaque
+  background-color: #000000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  transition: all 0.3s ease;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    border-color: var(--ion-color-primary);
+    box-shadow: var(--neon-glow-shadow);
+
+    img {
+      transform: scale(1.1);
+    }
+  }
+
+  // Estilização da imagem para garantir que ela ocupe o espaço e não tenha fundo branco
+  img {
+    // Com o Flexbox no .btn-google, o display: block e as margens/paddings já não são tão críticos,
+    // mas vamos manter a limpeza para evitar problemas.
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+}

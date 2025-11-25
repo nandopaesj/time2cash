@@ -1,0 +1,172 @@
+:host {
+  --ion-color-primary: #39ff14; // Verde Lima Neon
+  --ion-color-primary-contrast: #000000;
+  --ion-background-color: #0a0a0a; // Fundo preto profundo
+  --ion-text-color: #ffffff;
+  --ion-item-background: rgba(20, 20, 20, 0.8);
+
+  // Efeito de brilho (Glow)
+  --neon-glow-shadow: 0 0 5px rgba(57, 255, 20, 0.8),
+                      0 0 10px rgba(57, 255, 20, 0.6),
+                      0 0 20px rgba(57, 255, 20, 0.4),
+                      0 0 40px rgba(57, 255, 20, 0.2);
+
+  --neon-text-shadow: 0 0 3px rgba(57, 255, 20, 0.9),
+                      0 0 5px rgba(57, 255, 20, 0.7);
+}
+
+// --- Estilo Geral do Conteúdo ---
+ion-content {
+  --background: var(--ion-background-color);
+  // Mantém o fundo de grid sutil para consistência
+  --background: linear-gradient(rgba(57, 255, 20, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(57, 255, 20, 0.05) 1px, transparent 1px),
+                var(--ion-background-color);
+  background-size: 20px 20px, 20px 20px, 100% 100%;
+}
+
+// --- Header e Toolbar ---
+ion-toolbar {
+  --background: #101010;
+  --border-color: var(--ion-color-primary);
+  --border-width: 0 0 2px 0;
+  box-shadow: var(--neon-glow-shadow);
+}
+
+ion-title {
+  color: var(--ion-color-primary);
+  text-shadow: var(--neon-text-shadow);
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  text-align: center;
+}
+
+// Botão de Voltar
+ion-back-button {
+  --color: var(--ion-color-primary);
+  text-shadow: var(--neon-text-shadow);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateX(-3px);
+  }
+}
+
+// --- Títulos e Textos de Resumo ---
+h2 {
+  color: #ffffff;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(57, 255, 20, 0.3);
+  padding-bottom: 10px;
+
+  strong {
+    color: var(--ion-color-primary);
+    text-shadow: var(--neon-text-shadow);
+    font-weight: 700;
+  }
+}
+
+p {
+  color: #ffffff;
+  margin-bottom: 8px;
+  font-size: 1.1em;
+
+  strong {
+    color: var(--ion-color-primary);
+    font-weight: 600;
+    margin-right: 5px;
+  }
+}
+
+// Destaque para o bloco de totais
+div[style*="margin-top:12px"] {
+  padding: 15px;
+  border: 1px solid rgba(57, 255, 20, 0.5);
+  border-radius: 10px;
+  background: rgba(16, 16, 16, 0.7);
+  box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
+  margin-bottom: 20px;
+}
+
+// --- Campos de Input (Parcelas e Juros) ---
+ion-item {
+  --background: var(--ion-item-background);
+  --border-radius: 10px;
+  --highlight-color-focused: var(--ion-color-primary);
+  margin-bottom: 15px;
+  border: 1px solid rgba(57, 255, 20, 0.4);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    border-color: rgba(57, 255, 20, 0.8);
+  }
+
+  &.ion-focused {
+    border: 1px solid var(--ion-color-primary);
+    box-shadow: var(--neon-glow-shadow);
+  }
+}
+
+ion-label[position="stacked"] {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+ion-input {
+  --color: #ffffff;
+  --placeholder-color: rgba(255, 255, 255, 0.4);
+  --caret-color: var(--ion-color-primary);
+}
+
+// --- Botões de Ação ---
+div[style*="display:flex; gap:12px;"] {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px !important;
+}
+
+// Botão Confirmar (Primary - Neon)
+ion-button[color="primary"] {
+  --background: var(--ion-color-primary);
+  --background-activated: #5aff3d;
+  --background-focused: #48ff27;
+  --background-hover: #48ff27;
+  --color: var(--ion-color-primary-contrast);
+  --border-radius: 10px;
+  --box-shadow: var(--neon-glow-shadow);
+  font-weight: bold;
+  height: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  flex: 1;
+
+  &:hover {
+    transform: translateY(-2px);
+    --box-shadow: 0 0 10px rgba(57, 255, 20, 0.8),
+                  0 0 20px rgba(57, 255, 20, 0.6),
+                  0 0 40px rgba(57, 255, 20, 0.4);
+  }
+}
+
+// Botão Cancelar (Medium - Escuro)
+ion-button[color="medium"] {
+  --background: #333333;
+  --background-activated: #555555;
+  --color: #ffffff;
+  --border-radius: 10px;
+  font-weight: bold;
+  height: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  flex: 1;
+}
+
+// Estilo para o caso noPurchase
+ng-template p {
+  color: #ffffff;
+  font-size: 1.1em;
+}

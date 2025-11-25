@@ -8,7 +8,10 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div *ngIf="precoProduto && precoProduto > 0; else noSim">
+
+  <div *ngIf="precoProduto && precoProduto > 0; else noSim" class="resultado-container">
+
+    <!-- CARD -->
     <ion-card>
       <ion-card-header>
         <ion-card-title>{{ nomeProduto || 'Produto' }}</ion-card-title>
@@ -29,16 +32,18 @@
       </ion-card-content>
     </ion-card>
 
-    <div style="display:flex; gap:12px; margin-top:12px;">
+    <!-- BOTÕES EMBAIXO -->
+    <div class="botoes-container">
       <ion-button expand="block" color="primary" (click)="voltar()">Voltar</ion-button>
-      <ion-button expand="block" color="success" (click)="salvarCompra()">
-    Salvar compra
-  </ion-button>
+      <ion-button expand="block" color="success" (click)="salvarCompra()">Salvar compra</ion-button>
     </div>
+
   </div>
 
+  <!-- SEM SIMULAÇÃO -->
   <ng-template #noSim>
     <p style="margin-bottom:12px">{{ sugestaoTexto }}</p>
     <ion-button expand="block" (click)="voltar()">Voltar</ion-button>
   </ng-template>
+
 </ion-content>

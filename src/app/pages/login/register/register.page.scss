@@ -1,0 +1,123 @@
+:host {
+  --ion-color-primary: #39ff14; // Verde Lima Neon
+  --ion-color-primary-contrast: #000000;
+  --ion-background-color: #0a0a0a; // Fundo preto profundo
+  --ion-text-color: #ffffff;
+  --ion-item-background: rgba(20, 20, 20, 0.8);
+
+  // Efeito de brilho (Glow)
+  --neon-glow-shadow: 0 0 5px rgba(57, 255, 20, 0.8),
+                      0 0 10px rgba(57, 255, 20, 0.6),
+                      0 0 20px rgba(57, 255, 20, 0.4),
+                      0 0 40px rgba(57, 255, 20, 0.2);
+
+  --neon-text-shadow: 0 0 3px rgba(57, 255, 20, 0.9),
+                      0 0 5px rgba(57, 255, 20, 0.7);
+}
+
+// --- Estilo Geral do Conteúdo ---
+ion-content {
+  --background: var(--ion-background-color);
+  // Adiciona uma sutil textura de grid para um look mais "tech"
+  --background: linear-gradient(rgba(57, 255, 20, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(57, 255, 20, 0.05) 1px, transparent 1px),
+                var(--ion-background-color);
+  background-size: 20px 20px, 20px 20px, 100% 100%;
+}
+
+// --- Header e Toolbar ---
+ion-toolbar {
+  --background: #101010;
+  --border-color: var(--ion-color-primary);
+  --border-width: 0 0 2px 0;
+  box-shadow: var(--neon-glow-shadow);
+}
+
+ion-title {
+  color: var(--ion-color-primary);
+  text-shadow: var(--neon-text-shadow);
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  text-align: center;
+}
+
+// Botão de Voltar
+ion-back-button {
+  --color: var(--ion-color-primary);
+  text-shadow: var(--neon-text-shadow);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateX(-3px);
+  }
+}
+
+// --- Campos de Input (ion-item) ---
+ion-item {
+  --background: var(--ion-item-background);
+  --border-radius: 10px;
+  --border-color: transparent;
+  --highlight-color-focused: var(--ion-color-primary);
+  margin-bottom: 20px;
+  border: 1px solid rgba(57, 255, 20, 0.4);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    border-color: rgba(57, 255, 20, 0.8);
+  }
+
+  &.item-interactive-disabled {
+    opacity: 0.5;
+  }
+
+  &.ion-focused {
+    border: 1px solid var(--ion-color-primary);
+    box-shadow: var(--neon-glow-shadow);
+  }
+}
+
+ion-label[position="floating"] {
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.3s ease;
+
+  &.label-floating {
+    color: var(--ion-color-primary);
+    text-shadow: var(--neon-text-shadow);
+  }
+}
+
+ion-input {
+  --color: #ffffff;
+  --placeholder-color: rgba(255, 255, 255, 0.4);
+  --caret-color: var(--ion-color-primary);
+}
+
+// --- Botão de Cadastro ---
+ion-button[type="submit"] {
+  --background: var(--ion-color-primary);
+  --background-activated: #5aff3d;
+  --background-focused: #48ff27;
+  --background-hover: #48ff27;
+  --color: var(--ion-color-primary-contrast);
+  --border-radius: 10px;
+  --box-shadow: var(--neon-glow-shadow);
+  font-weight: bold;
+  height: 48px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  margin-top: 30px; // Adiciona um espaço extra acima do botão
+
+  &:hover {
+    transform: translateY(-2px);
+    --box-shadow: 0 0 10px rgba(57, 255, 20, 0.8),
+                  0 0 20px rgba(57, 255, 20, 0.6),
+                  0 0 40px rgba(57, 255, 20, 0.4);
+  }
+
+  &[disabled] {
+    opacity: 0.6;
+    --box-shadow: none;
+  }
+}

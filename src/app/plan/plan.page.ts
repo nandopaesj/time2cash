@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Auth, onAuthStateChanged, User } from '@angular/fire/auth';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { PurchasesService } from '../services/purchases';
-import { AlertController, ViewWillEnter } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-plan',
@@ -11,7 +11,7 @@ import { AlertController, ViewWillEnter } from '@ionic/angular';
   standalone: false,
 })
 
-export class PlanPage implements OnInit, OnDestroy, ViewWillEnter
+export class PlanPage implements OnInit, OnDestroy
 {
   user: User | null = null;
   uid: string | null = null;
@@ -48,13 +48,29 @@ export class PlanPage implements OnInit, OnDestroy, ViewWillEnter
   ) {}
 
   // por causa do tabs, a página não recarregava ao entrar
-  async ionViewWillEnter()
-  {
+  async ionViewWillEnter() {
     if (!this.uid) return;
+  
     this.loading = true;
+  
+    // recalcula limite de meses toda vez que abrir a página
+    const now = new Date();
+    this.maxAvailableYM = this.toYYYYMM(now.getFullYear(), now.getMonth());
+  
+    await this.determineMaxAvailableYM(this.uid);
+  
+    this.buildYears();
+  
+    // garante que mês selecionado continua válido
+    const months = this.monthsForYear(this.selectedYear);
+    if (!months.includes(this.selectedMonth)) {
+      this.selectedMonth = months[0];
+    }
+  
     await this.loadPurchasesFor(this.selectedMonth, this.selectedYear);
+  
     this.loading = false;
-  }
+  }  
 
   ngOnInit()
   {

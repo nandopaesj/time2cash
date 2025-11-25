@@ -1,1 +1,52 @@
+:host {
+  --ion-color-primary: #39ff14; // Verde Lima Neon
+  --ion-color-primary-contrast: #000000;
+  --neon-glow-shadow: 0 0 5px rgba(57, 255, 20, 0.8),
+                      0 0 10px rgba(57, 255, 20, 0.6),
+                      0 0 20px rgba(57, 255, 20, 0.4),
+                      0 0 40px rgba(57, 255, 20, 0.2);
+  --neon-text-shadow: 0 0 3px rgba(57, 255, 20, 0.9),
+                      0 0 5px rgba(57, 255, 20, 0.7);
+}
 
+ion-tab-bar {
+  --background: #101010; /* Fundo preto escuro */
+  --border-color: var(--ion-color-primary); /* Borda superior neon */
+  --border-width: 1px 0 0 0;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5); /* Sombra sutil para destacar */
+}
+
+ion-tab-button {
+  --color: #ffffff; /* Cor padrão dos ícones e labels (branco) */
+  --color-selected: var(--ion-color-primary); /* Cor da aba ativa (verde lima neon) */
+  --ripple-color: var(--ion-color-primary); /* Efeito de clique neon */
+  transition: all 0.3s ease;
+}
+
+/* Estilização da Aba Ativa */
+ion-tab-button[aria-selected="true"] {
+  /* Adiciona o brilho neon ao redor do botão ativo */
+  box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+  background: rgba(57, 255, 20, 0.05); /* Fundo sutil para a aba ativa */
+}
+
+/* Estilização do Ícone da Aba Ativa */
+ion-tab-button[aria-selected="true"] ion-icon {
+  color: var(--ion-color-primary);
+  /* Aplica o efeito de brilho neon ao ícone */
+  filter: drop-shadow(0 0 5px var(--ion-color-primary)) drop-shadow(0 0 10px var(--ion-color-primary));
+  transform: scale(1.1); /* Aumenta um pouco o ícone ativo */
+}
+
+/* Estilização do Label da Aba Ativa */
+ion-tab-button[aria-selected="true"] ion-label {
+  color: var(--ion-color-primary);
+  /* Aplica o efeito de sombra de texto neon ao label */
+  text-shadow: var(--neon-text-shadow);
+  font-weight: bold;
+}
+
+/* Efeito de Hover (para web/desktop, mas funciona no mobile) */
+ion-tab-button:hover {
+  --color: var(--ion-color-primary);
+}
