@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth';
 import { Router } from '@angular/router';
 import { ToastController, LoadingController } from '@ionic/angular';
+import { getFirebaseErrorMessage } from 'src/app/utils/firebase-errors';
 
 @Component({
   selector: 'app-register',
@@ -47,7 +48,8 @@ export class RegisterPage implements OnInit
     }catch(error: any)
     {
       await loading.dismiss();
-      this.presentToast(`Erro ao cadastrar: ${error.message}`, 'danger');
+      const message = getFirebaseErrorMessage(error?.code);
+      this.presentToast(message, 'danger');
     }
   }
 

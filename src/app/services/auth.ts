@@ -113,7 +113,7 @@ export class AuthService {
 
       if (!result || !result.result.idToken)
       {
-        throw new Error('No ID token from Google login ::: ' + JSON.stringify(result));
+        throw new Error('Nenhum Token foi recebido do Google ::: ' + JSON.stringify(result));
       }
 
       const credential = GoogleAuthProvider.credential(result.result.idToken);
