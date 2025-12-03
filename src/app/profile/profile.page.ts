@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Auth, onAuthStateChanged, User } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth';
 import { Firestore, doc, getDoc, setDoc, updateDoc, serverTimestamp } from '@angular/fire/firestore';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile',

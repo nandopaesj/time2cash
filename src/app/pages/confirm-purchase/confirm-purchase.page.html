@@ -11,7 +11,6 @@
   <div *ngIf="purchase; else noPurchase">
     <h2>Comprando: <strong>{{ purchase.nome }}</strong></h2>
     <p><strong>Preço:</strong> R$ {{ purchase.preco | number:'1.2-2' }}</p>
-    <!-- <p *ngIf="purchase.valorHora"><strong>Valor/hora usado:</strong> R$ {{ purchase.valorHora | number:'1.2-2' }}</p> -->
     <p *ngIf="purchase.horasNecessarias"><strong>Horas de trabalho necessárias:</strong> {{ purchase.horasNecessarias | number:'1.2-2' }} h</p>
 
     <ion-item>
