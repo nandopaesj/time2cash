@@ -49,8 +49,6 @@ export class AuthService {
     await SocialLogin.initialize({
       google: {
         webClientId: '124061756981-ti5grcv54jord3ihlegu97emvgp7oi0i.apps.googleusercontent.com',
-        iOSClientId: 'YOUR_IOS_CLIENT_ID',        // Required for iOS (TODO)
-        iOSServerClientId: '124061756981-ti5grcv54jord3ihlegu97emvgp7oi0i.apps.googleusercontent.com',  // Required for iOS offline mode and server authorization (same as webClientId) (TODO: COLOQUEI O PADRÃO COMO FALAVA A DOCUMENTAÇÃO MAS SLA)
         mode: 'online',
       }
     });

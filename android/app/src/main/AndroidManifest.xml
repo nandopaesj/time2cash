@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -7,6 +8,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- OBRIGATÓRIO PARA O GOOGLE SIGN-IN FUNCIONAR -->
+        <meta-data
+            android:name="com.google.android.gms.google-services"
+            android:value="true" />
+
+        <!-- OBRIGATÓRIO: CLIENT_ID DO WEB CLIENT -->
+        <meta-data
+            android:name="com.google.android.gms.client_id"
+            android:value="124061756981-ti5grcv54jord3ihlegu97emvgp7oi0i.apps.googleusercontent.com" />
+
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode|navigation"
             android:name=".MainActivity"
@@ -14,13 +26,15 @@
             android:theme="@style/AppTheme.NoActionBarLaunch"
             android:launchMode="singleTask"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
-        <!-- FileProvider para imagens/arquivos -->
+        <!-- FileProvider -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -29,13 +43,9 @@
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" />
         </provider>
 
-        <!-- Meta-data para Google Social Login -->
-        <meta-data
-            android:name="com.google.android.gms.client_id"
-            android:value="124061756981-ti5grcv54jord3ihlegu97emvgp7oi0i.apps.googleusercontent.com"
-        />
     </application>
 
     <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>

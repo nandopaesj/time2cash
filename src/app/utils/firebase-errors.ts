@@ -1,5 +1,5 @@
 export const FIREBASE_ERRORS: Record<string, string> = {
-    'auth/app-deleted': 'O banco de dados não foi localizado.',
+  'auth/app-deleted': 'O banco de dados não foi localizado.',
   'auth/expired-action-code': 'O código da ação o ou link expirou.',
   'auth/invalid-action-code': 'O código da ação é inválido. Isso pode acontecer se o código estiver malformado ou já tiver sido usado.',
   'auth/user-disabled': 'O usuário correspondente à credencial fornecida foi desativado.',
